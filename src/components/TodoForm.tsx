@@ -19,7 +19,7 @@ export default function TodoForm({addTodo}: TodoFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} role="form">
       <InputGroup className="mb-3">
         <Form.Control
           value={text}

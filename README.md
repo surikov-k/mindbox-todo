@@ -1,7 +1,12 @@
 
 # Тестовое задание Frontend junior в Mindbox
+### Запуск проекта
 ```bash
 npm i && npm run start
+```
+### Запуск тестов
+```bash
+npm test
 ```
 ---
 ### Что должно быть в интерфейсе:
