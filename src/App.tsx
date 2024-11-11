@@ -1,14 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Footer, TodoForm, TodoList } from './components';
+import { loadTodosFromLocalStorage, saveTodosToLocalStorage } from './storage/local-storage-utils.ts';
 import { Todo } from './types';
 
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(
+    () => {
+      return loadTodosFromLocalStorage();
+    }
+  );
+
+  useEffect(() => {
+    saveTodosToLocalStorage(todos);
+  }, [todos]);
 
   const addTodo = (text: string) => {
     setTodos([...todos, {id: Date.now(), text, completed: false}]);
