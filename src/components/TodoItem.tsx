@@ -1,3 +1,6 @@
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import { Todo } from '../types';
 
 interface TodoItemProps {
@@ -8,16 +11,24 @@ interface TodoItemProps {
 
 export default function TodoItem({todo, toggleTodo, removeTodo}: TodoItemProps) {
   return (
-    <div>
-      <input
-        type="checkbox"
-        checked={todo.completed}
-        onChange={() => toggleTodo(todo.id)}
+    <InputGroup className="mb-1"
+                size="sm">
+      <InputGroup.Text id="basic-addon1">
+        <Form.Check
+          type='checkbox'
+          checked={todo.completed}
+          onChange={() => toggleTodo(todo.id)}
+        />
+      </InputGroup.Text>
+      <Form.Control
+        className={todo.completed ? 'text-decoration-line-through text-muted fst-italic' : ''}
+        placeholder={todo.text}
+        disabled={true}
       />
-      <span style={{textDecoration: todo.completed ? 'line-through' : 'none'}}>
-        {todo.text}
-      </span>
-      <button onClick={() => removeTodo(todo.id)}>Delete</button>
-    </div>
-  );
+      <Button variant="outline-danger"
+              onClick={() => removeTodo(todo.id)}>
+        ⌫
+      </Button>
+    </InputGroup>
+  )
 };

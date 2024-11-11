@@ -1,7 +1,12 @@
 import { useState } from 'react';
+import { NavLink } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 
-import { TodoForm, TodoList } from './components';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { Footer, TodoForm, TodoList } from './components';
 import { Todo } from './types';
+
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -19,10 +24,15 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <h1>Todos</h1>
-      <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} toggleTodo={toggleTodo} removeTodo={removeTodo} />
+    <div className="d-flex flex-column vh-100">
+      <Container fluid={false}>
+        <h1 className="text-center my-4">Todos</h1>
+        <TodoForm addTodo={addTodo}/>
+        <TodoList todos={todos}
+                  toggleTodo={toggleTodo}
+                  removeTodo={removeTodo}/>
+      </Container>
+      <Footer/>
     </div>
   )
 }
