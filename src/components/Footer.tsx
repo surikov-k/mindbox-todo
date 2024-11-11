@@ -28,9 +28,9 @@ export default function Footer() {
                             y1="240"
                             gradientUnits="userSpaceOnUse">
               <stop offset="0"
-                    stop-color="#1d93d2"/>
+                    stopColor="#1d93d2"/>
               <stop offset="1"
-                    stop-color="#38b0e3"/>
+                    stopColor="#38b0e3"/>
             </linearGradient>
           </defs>
           <circle cx="120"

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { NavLink } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,15 +22,24 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
   }
 
+  const editTodo = (id: number, newText: string) => {
+    setTodos(todos.map(todo => todo.id === id ? {...todo, text: newText} : todo));
+  }
+
   return (
     <div className="d-flex flex-column vh-100">
       <Container fluid={false}>
         <h1 className="text-center my-4">Todos</h1>
+
         <TodoForm addTodo={addTodo}/>
+
         <TodoList todos={todos}
                   toggleTodo={toggleTodo}
-                  removeTodo={removeTodo}/>
+                  removeTodo={removeTodo}
+                  editTodo={editTodo}
+        />
       </Container>
+
       <Footer/>
     </div>
   )
