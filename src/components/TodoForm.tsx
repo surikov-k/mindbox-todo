@@ -1,13 +1,14 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, RefObject, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 interface TodoFormProps {
   addTodo: (text: string) => void;
+  inputRef: RefObject<HTMLInputElement>;
 }
 
-export default function TodoForm({addTodo}: TodoFormProps) {
+export default function TodoForm({addTodo, inputRef}: TodoFormProps) {
   const [text, setText] = useState('');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -19,9 +20,11 @@ export default function TodoForm({addTodo}: TodoFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} role="form">
+    <form onSubmit={handleSubmit}
+          role="form">
       <InputGroup className="mb-3">
         <Form.Control
+          ref={inputRef}
           value={text}
           type="text"
           size="lg"

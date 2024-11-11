@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,6 +9,8 @@ import { Todo } from './types';
 
 
 function App() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const [todos, setTodos] = useState<Todo[]>(
     () => {
       return loadTodosFromLocalStorage();
@@ -17,7 +19,12 @@ function App() {
 
   useEffect(() => {
     saveTodosToLocalStorage(todos);
+
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, [todos]);
+
 
   const addTodo = (text: string) => {
     setTodos([...todos, {id: Date.now(), text, completed: false}]);
@@ -40,7 +47,7 @@ function App() {
       <Container fluid={false}>
         <h1 className="text-center my-4">Todos</h1>
 
-        <TodoForm addTodo={addTodo}/>
+        <TodoForm addTodo={addTodo} inputRef={inputRef}/>
 
         <TodoList todos={todos}
                   toggleTodo={toggleTodo}

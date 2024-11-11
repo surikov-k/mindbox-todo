@@ -12,8 +12,6 @@ vi.mock('./storage/local-storage-utils', () => ({
 describe('Todo App', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    // @ts-ignore
-    saveTodosToLocalStorage.mockClear();
   });
 
   test('renders the Todo app title', () => {
@@ -42,6 +40,7 @@ describe('Todo App', () => {
 
     const newTodo = screen.getByDisplayValue('New Todo');
     expect(newTodo).toBeInTheDocument();
+    expect(saveTodosToLocalStorage).toHaveBeenCalledTimes(2);
   });
 
   test('toggles a todo as completed', () => {
