@@ -12,6 +12,7 @@ vi.mock('./storage/local-storage-utils', () => ({
 describe('Todo App', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // @ts-ignore
     saveTodosToLocalStorage.mockClear();
   });
 
@@ -22,6 +23,7 @@ describe('Todo App', () => {
   });
 
   test('loads todos from local storage on initial render', () => {
+    // @ts-ignore
     loadTodosFromLocalStorage.mockReturnValueOnce([{ id: 1, text: 'Test todo', completed: false }]);
     render(<App />);
     expect(loadTodosFromLocalStorage).toHaveBeenCalled();
